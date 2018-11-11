@@ -29,6 +29,15 @@ const exampledata3 =
     date: "11/11/2018",
     time: "21:20:10"
   }
+  const exampledata4 = 
+  {
+    userId: "jkatzeff-fake-2",
+    type: "spotify",
+    songURI: "spotify:track:2UYHP0RQqPFvue0Ygs5Amm",
+    numLikes: 100,
+    date: "11/11/2018",
+    time: "21:20:10"
+  }
 
 class App extends Component {
   handleLike = (snip) => {
@@ -40,7 +49,7 @@ class App extends Component {
   constructor(){
     super();
     this.state = {
-      snips: [exampledata, exampledata2, exampledata3]
+      snips: [exampledata, exampledata2, exampledata3, exampledata4]
     }
   }
 

@@ -20,7 +20,7 @@ export default class Snip extends React.Component {
 		const time = this.props.data.time
 		return (
 
-				<div class={"container"} style={{border: "9px solid black", borderStyle: "double", float: "left", padding: "12px", width: "40%"}}>
+				<div class={"container"} style={{border: "9px solid black", borderStyle: "double", float: "left", padding: "12px", width: "40%", backgroundColor: "#FEF3D7"}}>
 					<div class={"row"}>
 						<div class={"col"}>
 							<EmbeddedSong songURI={songURI} />
