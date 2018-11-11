@@ -1,6 +1,0 @@
-like twitter but just for posting music!
-
--Navbar
--User Profile Section -> Num Followers, Num Following, Num Songs posted
--Trending Songs
--"Tweet" component -> includes User ID, Song Info, Like button, Number of likes, comments
