@@ -1,4 +1,5 @@
 .App {
+  display: grid;
   text-align: center;
 }
 
@@ -29,4 +30,8 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+.border-9 {
+  border-width:9px !important;
 }

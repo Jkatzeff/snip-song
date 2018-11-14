@@ -1,20 +1,31 @@
 import React from 'react';
+import LikeOrUnlike from './likeorunlike.jsx'
+const formatTime = (date, time) => {
+	const base = "Posted on " + date + " at " + time;
+	return base;
+}
 
 const UserInfo = (props) => {
-  return ( 
-  	<div class={"container"}>
-  		<div class={"col"} >
-  			<div style={{border: "1px dotted red", backgroundColor: "rgba(64, 128, 200, 0.3)"}} class={"row"}>
-  				{"Username: " + props.userId}
+  return ( <div>
+	  			<div className="col" >
+	  				<div className="bg-warning">
+	  					{"Username: " + props.userId}
+	  				</div>
+	  			</div>
+	  			<div className="col">
+	  				<div className="bg-info">
+	  	  				{"Likes: " +props.numLikes}
+	  	  			</div>
+	  			</div>
+	  			<div className="col">				
+	  				<LikeOrUnlike canLike={props.canLike} data={props.data} onLike={props.onLike} onUnlike={props.onUnlike}/>  					
+	  			</div>
+	  			<div className="col">
+	  				<div className="bg-primary">
+	  					{formatTime(props.date,props.time)}
+	  				</div>
+	  			</div>
   			</div>
-  			<button class={"row"} style={{backgroundColor: "rgba(100, 100, 255, 0.9)"}} onClick={() => props.onLike(props.data)}>
-  				{"Likes: " +props.numLikes}
-  			</button>
-  			<div class={"row"} style={{backgroundColor: "rgba(50, 0, 122, 0.1)"}}>
-  				{"Posted on " + props.date + " at " + props.time}
-  			</div>
-  		</div>
-  	</div>
   )
 }
 

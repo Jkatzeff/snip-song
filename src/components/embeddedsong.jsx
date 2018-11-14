@@ -2,13 +2,16 @@ import React from 'react';
 
 const EmbeddedSong = (props) => {
 	return (
+	<div className="row">
+	<div className="col">
   	<iframe 
 	  	src={"https://open.spotify.com/embed/track/" + props.songURI.split(":")[2]} 
-		style={{height: 80, width: "100%", float:"left"}}
-		frameborder={0} 
+		frameBorder="0" 
 		allowtransparency={"true"} 
-		allow={"encrypted-media"}>
-	</iframe>
+		allow={"encrypted-media"}
+		title={props.songURI.split(":")[2]}>
+	</iframe></div>
+	 </div>
   )
 }
 

@@ -9,7 +9,8 @@ const exampledata =
     songURI: "spotify:track:3QkTIg9pFStcRvsC3SA10t",
     numLikes: 0,
     date: "11/11/2018",
-    time: "9:09:59"
+    time: "9:09:59",
+    canLike: true
   }
 const exampledata2 = 
   {
@@ -18,7 +19,8 @@ const exampledata2 =
     songURI: "spotify:track:6QXQEeKlpcEtg5eOJfr8nO",
     numLikes: 0,
     date: "11/11/2018",
-    time: "20:47:53"
+    time: "20:47:53",
+    canLike: true
   }
 const exampledata3 = 
   {
@@ -27,7 +29,8 @@ const exampledata3 =
     songURI: "spotify:track:2UYHP0RQqPFvue0Ygs5Amm",
     numLikes: 100,
     date: "11/11/2018",
-    time: "21:20:10"
+    time: "21:20:10",
+    canLike: true
   }
   const exampledata4 = 
   {
@@ -36,7 +39,8 @@ const exampledata3 =
     songURI: "spotify:track:2UYHP0RQqPFvue0Ygs5Amm",
     numLikes: 100,
     date: "11/11/2018",
-    time: "21:20:10"
+    time: "21:20:10",
+    canLike: true
   }
 
 class App extends Component {
@@ -44,6 +48,14 @@ class App extends Component {
     let arr = this.state.snips;
     const index = arr.indexOf(snip);
     arr[index].numLikes++;
+    arr[index].canLike = !arr[index].canLike
+    this.setState({snips: arr})
+  }
+  handleUnlike = (snip) => {
+    let arr = this.state.snips;
+    const index = arr.indexOf(snip);
+    arr[index].numLikes--;
+    arr[index].canLike = !arr[index].canLike
     this.setState({snips: arr})
   }
   constructor(){
@@ -55,8 +67,8 @@ class App extends Component {
 
   render() {
     return (
-        <div>
-          {this.state.snips.map((data, index) => <div style={{height: 150}}><Snip data={data} onLike={this.handleLike}/></div>)}
+        <div className="container">
+            {this.state.snips.map((data, index) => <Snip key={data+index} data={data} onLike={this.handleLike} onUnlike={this.handleUnlike}/>)}
       </div>
     );
   }
