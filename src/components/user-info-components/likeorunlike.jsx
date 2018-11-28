@@ -2,13 +2,13 @@ import React from 'react';
 
 const LikeOrUnlike = (props) =>{ 
 	return(props.canLike ? 
-	  					<button className="user-info-action-like" onClick={() => props.onLike(props.data)}>
+	  					<a href="#" className="user-info-action-like" onClick={() => props.onLike(props.data)}>
 	  						<div className="user-info-text">Like!</div>
-	  					</button>
+	  					</a>
 	  					:
-	  					<button className="user-info-action-dislike" onClick={() => props.onUnlike(props.data)}>
+	  					<a href="#" className="user-info-action-dislike" onClick={() => props.onUnlike(props.data)}>
 	  						<div className="user-info-text">Unlike!</div>
-	  					</button>)}
+	  					</a>)}
   
 
 export default LikeOrUnlike;

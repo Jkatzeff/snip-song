@@ -40,7 +40,7 @@ const exampledata3 =
     numLikes: 100,
     date: "11/11/2018",
     time: "21:20:10",
-    canLike: true
+    canLike: false
   }
 
 class App extends Component {

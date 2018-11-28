@@ -13,9 +13,21 @@ export default class Snip extends React.Component {
 		return (
 
 				<div className="border border-dark snip">
-							<EmbeddedSong songURI={songURI} />
-							<UserInfo canLike={canLike} userId={userId} numLikes={numLikes} date={date} time={time} onLike={this.props.onLike} onUnlike={this.props.onUnlike} data={this.props.data}/>
-							<div className="load-comments"><div className="user-info-text">{"Load Comments!"}</div></div>
+							<EmbeddedSong 
+								songURI={songURI} 
+							/>
+							<UserInfo 
+								canLike={canLike} 
+								userId={userId} 
+								numLikes={numLikes} 
+								date={date} time={time} 
+								onLike={this.props.onLike} 
+								onUnlike={this.props.onUnlike} 
+								data={this.props.data}
+							/>
+							<div className="description">
+								<div className="user-info-text">{"Description!"}</div>
+							</div>
 				</div>
 		);
 	}

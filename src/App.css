@@ -48,14 +48,22 @@
   margin: 0 auto;
 }
 
-
 .snip {
-  background-color: #fef3d0;
+  background-color: #feffd0;
   display: flex;
+  margin-bottom: 20px;
+  margin-left: 20px;
+  margin-right: 20px;
 }
+
+.snip:first-child {
+  margin-top: 10px;
+}
+
 
 .embedded-song {
   flex: 2;
+  border: 1px solid black;  
   /*height: 100px;*/
   /*position: absolute;*/
   /*clip: rect(0, 10px, 5px, 2px)*/
@@ -66,40 +74,54 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  border: 1px solid black;
 }
 
-.load-comments {
+.description {
+  flex: 1;
+  border: 1px solid black;
+  display: flex;
+}
+.user-info-container-1 {
+  flex-basis: 25%;
+  display: flex;
+}
+.user-info-id {
   flex: 1;
   display: flex;
 }
 
-.user-info-id {
-  flex-basis: 20%;
-  display: flex;
-}
-
 .user-info-likes {
-  flex-basis: 20%;
+  flex: 1;
   display: flex;
 }
 
 .user-info-action-like {
-  background-color: rgba(100, 100, 255, 0.9);
-  flex-basis: 20%;
+  /*background-color: rgba(100, 100, 255, 0.9);*/
+  background-color: red;
+  flex-basis: 25%;
   display: flex;
+}
+.user-info-action-like:hover {
+  background-color: #C64040;
 }
 
 .user-info-action-dislike {
-  background-color: rgba(155, 155, 0, 0.9);
-  flex-basis: 20%;
+  background-color: #4CD138;
+  flex-basis: 25%;
   display: flex;
+}
+.user-info-action-dislike:hover {
+  background-color: #88DA7B;
 }
 
 .user-info-time {
-  flex-basis: 20%;
+  flex-basis: 25%;
   display: flex;
 }
 
 .user-info-text {
   margin: auto;
+  text-decoration: none;
+  color: black;
 }
