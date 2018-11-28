@@ -2,12 +2,12 @@ import React from 'react';
 
 const LikeOrUnlike = (props) =>{ 
 	return(props.canLike ? 
-	  					<button style={{backgroundColor: "rgba(100, 100, 255, 0.9)"}} onClick={() => props.onLike(props.data)}>
-	  						Like!
+	  					<button className="user-info-action-like" onClick={() => props.onLike(props.data)}>
+	  						<div className="user-info-text">Like!</div>
 	  					</button>
 	  					:
-	  					<button style={{backgroundColor: "rgba(155, 155, 0, 0.9)"}} onClick={() => props.onUnlike(props.data)}>
-	  						Unlike!
+	  					<button className="user-info-action-dislike" onClick={() => props.onUnlike(props.data)}>
+	  						<div className="user-info-text">Unlike!</div>
 	  					</button>)}
   
 

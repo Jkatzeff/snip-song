@@ -6,25 +6,23 @@ const formatTime = (date, time) => {
 }
 
 const UserInfo = (props) => {
-  return ( <div>
-	  			<div className="col" >
-	  				<div className="bg-warning">
-	  					{"Username: " + props.userId}
-	  				</div>
-	  			</div>
-	  			<div className="col">
-	  				<div className="bg-info">
-	  	  				{"Likes: " +props.numLikes}
-	  	  			</div>
-	  			</div>
-	  			<div className="col">				
-	  				<LikeOrUnlike canLike={props.canLike} data={props.data} onLike={props.onLike} onUnlike={props.onUnlike}/>  					
-	  			</div>
-	  			<div className="col">
-	  				<div className="bg-primary">
-	  					{formatTime(props.date,props.time)}
-	  				</div>
-	  			</div>
+  return ( <div className="user-info">
+  				<div className="bg-warning user-info-id">
+  					<div className="user-info-text">
+  						{"Username: " + props.userId}
+  					</div>
+  				</div>
+  				<div className="bg-info user-info-likes">
+  	  				<div className="user-info-text">
+  	  					{"Likes: " + props.numLikes}
+  	  				</div>
+  	  			</div>
+  				<LikeOrUnlike canLike={props.canLike} data={props.data} onLike={props.onLike} onUnlike={props.onUnlike}/>  					
+  				<div className="bg-primary user-info-time">
+  					<div className="user-info-text">
+  						{formatTime(props.date,props.time)}
+  					</div>
+  			</div>
   			</div>
   )
 }

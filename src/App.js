@@ -67,7 +67,7 @@ class App extends Component {
 
   render() {
     return (
-        <div className="container">
+        <div className="main-app">
             {this.state.snips.map((data, index) => <Snip key={data+index} data={data} onLike={this.handleLike} onUnlike={this.handleUnlike}/>)}
       </div>
     );
