@@ -42,8 +42,17 @@
   padding-right:0;
   padding-left:0;
 }
-
+/*****************************/
 .main-app {
+/*  height: 75vh;
+  font-size: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid black;*/
+}
+
+.snip-container {
   max-width: 1400px;
   margin: 0 auto;
 }
@@ -124,4 +133,34 @@
   margin: auto;
   text-decoration: none;
   color: black;
+}
+
+
+.login-page {
+  height: 80vh;
+  font-size: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid black;
+    margin: 30px;
+  margin-left: 30%;
+  margin-right: 30%;
+}
+
+.default-login-page {
+  display: flex;
+  flex-direction: column;
+}
+
+.enter-username {
+  flex: 1;
+}
+.enter-password {
+  flex: 1;
+}
+
+
+.flex-one {
+  flex: 1;
 }
