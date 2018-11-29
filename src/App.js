@@ -18,7 +18,11 @@ class App extends Component {
     if ((username===validLogins[0].username && passwd===validLogins[0].passwd)){
       alert('Successfully logged in! Redirecting.')
       this.setState((prev) => ({loggedIn: true}))
+    }else{
+      alert('Unsuccessful login, try again.')
     }
+    document.getElementById('username').value='';
+    document.getElementById('password').value='';
   }
   render() {
     return (
