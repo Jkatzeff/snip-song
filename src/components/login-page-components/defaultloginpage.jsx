@@ -1,4 +1,5 @@
 import React from 'react';
+import Banner from '../banner.jsx'
 export default class DefaultLoginPage extends React.Component {
 	constructor(props) {
 		super(props);
@@ -7,6 +8,7 @@ export default class DefaultLoginPage extends React.Component {
 	render() {
 		return (
 			<div className="default-login-page">
+				<Banner />
 				<div className="enter-username">
 					<div className="flex-one">Username:</div> <input type="text" id="username"></input>
 				</div>
@@ -14,7 +16,7 @@ export default class DefaultLoginPage extends React.Component {
 					<div className="flex-one">Password:</div><input type="password" id="password"></input>
 				</div>
 				<input type="submit" onClick={() => this.props.checkLogin()} id="submit" className="submit"></input>
-				<input type="submit" id="register" className="register" value="Register"></input>
+				<input type="submit" onClick={() => this.props.register()} id="register" className="register" value="Register"></input>
 			</div>
 		);
 	}
