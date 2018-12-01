@@ -8,9 +8,9 @@
 .spotify-logo {
   /*animation: App-logo-spin infinite 20s linear;*/
   height: 5vmin;
-  margin-left: 20px;
-  display: flex;
-  margin: auto;
+  /*margin-left: 20px;*/
+  /*display: flex;*/
+  /*margin: auto;*/
 }
 
 .App-header {
@@ -47,12 +47,22 @@
 }
 /*****************************/
 .main-app {
+  background-color: #fff4e2;
 /*  height: 75vh;
   font-size: 30px;
   display: flex;
   justify-content: center;
   align-items: center;
   border: 1px solid black;*/
+}
+
+.banner {
+  display: flex;
+  background-color: pink;
+  /*width: 80vw;*/
+  /*margin-left: 20px;*/
+  /*max-width: 1400px;*/
+  /*margin: 10vw;*/
 }
 
 .snip-container {
@@ -146,24 +156,55 @@
   justify-content: center;
   align-items: center;
   border: 1px solid black;
-    margin: 30px;
+  margin: 30px;
   margin-left: 30%;
   margin-right: 30%;
+  background-color: beige;
 }
 
 .default-login-page {
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
+  /*align-items: stretch;*/
 }
 
 .enter-username {
-  flex: 1;
+  flex-basis: 30%;
+  display: flex;
+  /*flex: 1;*/
 }
 .enter-password {
-  flex: 1;
+  /*flex: 1;*/
+  flex-basis: 30%;
+  display: flex;
 }
+
+.flex-basis-thirty {
+  flex-basis: 30%;
+  display: flex;
+}
+
+.banner-text {
+  color: blue;
+  font-family: "Lucida Sans Unicode";
+}
+
+
 
 
 .flex-one {
+  display: flex;
   flex: 1;
+}
+.flex-two {
+  display: flex;
+  flex: 2;
+}
+.flex-three {
+  display: flex;
+  flex: 3;
+}
+.flex-four {
+  flex: 4;
 }

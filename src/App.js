@@ -9,7 +9,8 @@ class App extends Component {
   constructor() {
     super();
     this.state = {
-      loggedIn: false
+      loggedIn: false,
+      username: ''
     };
   }
   checkLogin = () => {
@@ -18,8 +19,8 @@ class App extends Component {
     let found = false;
     validLogins.forEach(({username: user_elem, passwd: pass_elem}) => {
     if ((username===user_elem && passwd===pass_elem)){
-      alert('Successfully logged in! Redirecting.')
-      this.setState((prev) => ({loggedIn: true}))
+      alert('Welcome, ' + username +'. Redirecting.')
+      this.setState((prev) => ({loggedIn: true, username: username}))
       found = true;
       return;
     }      
@@ -51,10 +52,13 @@ class App extends Component {
   render() {
     return (
         <div className="main-app">
-          {this.state.loggedIn ? <LoggedInPage /> : 
+          {this.state.loggedIn ? <LoggedInPage loggedIn={this.state.loggedIn} username={this.state.username}/> : 
           <LogInPage 
+            loggedIn={this.state.loggedIn}
             checkLogin={this.checkLogin}
-            register={this.register}/>}
+            register={this.register}
+            username={this.state.username}/>
+          }
           <button onClick={() => this.setState((prev) => ({loggedIn: !prev.loggedIn}))}>
               (Click to change loggedIn)
           </button>

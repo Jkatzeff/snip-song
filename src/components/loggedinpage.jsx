@@ -10,7 +10,7 @@ export default class LoggedInPage extends React.Component {
 	render() {
 		return (
 			<div>
-				<Banner />
+				<Banner loggedIn={this.props.loggedIn} username={this.props.username}/>
 				<SnipsContainer />
 			</div>
 		);
