@@ -1,11 +1,11 @@
 import React from "react";
 
-const LikeOrUnlike = props => {
-	return props.canLike ? (
+const LikeOrUnlike = ({canLike, onLike, onUnlike, data}) => {
+	return canLike ? (
 		<a
 			href="#"
 			className="user-info-action-like"
-			onClick={() => props.onLike(props.data)}
+			onClick={() => onLike(data)}
 		>
 			<div className="user-info-text">Like!</div>
 		</a>
@@ -13,7 +13,7 @@ const LikeOrUnlike = props => {
 		<a
 			href="#"
 			className="user-info-action-dislike"
-			onClick={() => props.onUnlike(props.data)}
+			onClick={() => onUnlike(data)}
 		>
 			<div className="user-info-text">Unlike!</div>
 		</a>

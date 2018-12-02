@@ -1,9 +1,9 @@
 import React from "react";
 
-const UserIdComponent = props => {
+const UserIdComponent = ({userId}) => {
 	return (
 		<div className="bg-warning user-info-id">
-			<div className="user-info-text">{"Username: " + props.userId}</div>
+			<div className="user-info-text">{"Username: " + userId}</div>
 		</div>
 	);
 };

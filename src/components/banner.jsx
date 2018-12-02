@@ -1,12 +1,12 @@
 import React from "react";
 import logo from "../spotify-logo.svg";
-const Banner = props => {
-	console.log(props.loggedIn);
+const Banner = ({loggedIn, username}) => {
+	console.log(loggedIn);
 	return (
 		<div className="banner">
-			{props.loggedIn ? (
+			{loggedIn ? (
 				<div className="flex-two banner-text">
-					<h3>Welcome, {props.username}. Click here to ...</h3>
+					<h3>Welcome, {username}. Click here to ...</h3>
 				</div>
 			) : (
 				<div className="flex-two banner-text">
@@ -19,7 +19,6 @@ const Banner = props => {
 			<div className="flex-one">
 				<div className="flex-one">
 					<div>Powered by Spotify (and you!) </div>
-
 					<img src={logo} className="spotify-logo" alt="logo" />
 				</div>
 			</div>

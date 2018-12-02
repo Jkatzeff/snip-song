@@ -1,9 +1,9 @@
 import React from "react";
 
-const NumLikesComponent = props => {
+const NumLikesComponent = ({numLikes}) => {
 	return (
 		<div className="bg-info user-info-likes">
-			<div className="user-info-text">{"Likes: " + props.numLikes}</div>
+			<div className="user-info-text">{"Likes: " + numLikes}</div>
 		</div>
 	);
 };

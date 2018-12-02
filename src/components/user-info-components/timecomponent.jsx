@@ -5,11 +5,11 @@ const formatTime = (date, time) => {
 	return base;
 }
 
-const TimeComponent = (props) => {
+const TimeComponent = ({date, time}) => {
   return (
     <div className="bg-primary user-info-time">
   					<div className="user-info-text">
-  						{formatTime(props.date,props.time)}
+  						{formatTime(date,time)}
   					</div>
   				</div>
   )
