@@ -208,3 +208,7 @@
 .flex-four {
   flex: 4;
 }
+
+.display-flex { 
+  display: flex;
+}
