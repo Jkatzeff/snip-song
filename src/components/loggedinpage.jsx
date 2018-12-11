@@ -34,7 +34,10 @@ export default class LoggedInPage extends React.Component {
 	}
 
 	componentDidMount() {
-		this.timerID = setInterval(() => {this.getCurrentUser(); this.getTopSongs();}, 3000);
+		this.timerID = setInterval(() => {
+			this.getCurrentUser();
+			this.getTopSongs();
+		}, 3000);
 	}
 	componentWillUnmount() {
 		clearInterval(this.timerID);
@@ -45,12 +48,13 @@ export default class LoggedInPage extends React.Component {
 			.then(response => this.setState({ userId: response.id }));
 	}
 	getTopSongs() {
-		spotifyWebApi.getMyTopTracks({limit: 5}).then(response =>{ 
-					this.setState({ topSongs: response.items.map(item => item.name)});})
+		spotifyWebApi.getMyTopTracks({ limit: 5 }).then(response => {
+			this.setState({ topSongs: response.items.map(item => item.name) });
+		});
 	}
 	render() {
 		const loggedIn = this.state.loggedInSpotify;
-		const user = this.state.userId;
+		const spotifyUser = this.state.userId;
 		// todo: make banner include spotify loggedin status
 		const songs = this.state.topSongs;
 		return (
@@ -58,10 +62,9 @@ export default class LoggedInPage extends React.Component {
 				<Banner
 					loggedIn={this.props.loggedIn}
 					username={this.props.username}
+					spotifyUser={spotifyUser}
 				/>
-				{loggedIn ? <div>{"Hello, " + user}</div> : <LoginToSpotify />}
-				<ul>{songs.map(song => <li>{song}</li>)}</ul>
-				<PostNewSnip />
+				<PostNewSnip songs={songs} />
 				<SnipsContainer />
 			</div>
 		);

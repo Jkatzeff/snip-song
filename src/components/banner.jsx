@@ -1,12 +1,11 @@
 import React from "react";
 import logo from "../spotify-logo.svg";
-const Banner = ({loggedIn, username}) => {
-	console.log(loggedIn);
+const Banner = ({loggedIn, username, spotifyUser}) => {
 	return (
 		<div className="banner">
 			{loggedIn ? (
 				<div className="flex-two banner-text">
-					<h3>Welcome, {username}. Click here to ...</h3>
+					<h3>Welcome, {username}. {spotifyUser ? "Logged in as " + spotifyUser + " on Spotify." : ""}</h3>
 				</div>
 			) : (
 				<div className="flex-two banner-text">
