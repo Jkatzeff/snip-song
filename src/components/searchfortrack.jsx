@@ -35,13 +35,18 @@ export default class SearchForTrack extends React.Component {
 							this.searchForTrack(
 								document.getElementById("query").value
 							);
+							document.getElementById("query").value = "";
 						}}
 					>
 						<div>Search for track.</div>
 					</button>
 				</div>
-				{(response && active) ? <PostNewSnip topSongs={response} createSnip={this.props.createSnip} onCreate={this.onCreate}/>
-						  : null}
+				{(response && active) ? 
+					<div>
+					<button onClick={() => this.onCreate()}>Hide list.</button>
+					<PostNewSnip topSongs={response} createSnip={this.props.createSnip} onCreate={this.onCreate}/>
+					</div>
+					: null}
 			</div>
 		);
 	}

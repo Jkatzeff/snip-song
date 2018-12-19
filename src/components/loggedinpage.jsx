@@ -15,44 +15,6 @@ function getHashParams() {
 	}
 	return hashParams;
 }
-
-const exampledata = {
-	userId: "jkatzeff",
-	type: "spotify",
-	songURI: "spotify:track:3QkTIg9pFStcRvsC3SA10t",
-	numLikes: 0,
-	date: "11/11/2018",
-	time: "9:09:59",
-	canLike: true
-};
-const exampledata2 = {
-	userId: "jkatzeff-fake",
-	type: "spotify",
-	songURI: "spotify:track:6QXQEeKlpcEtg5eOJfr8nO",
-	numLikes: 0,
-	date: "11/11/2018",
-	time: "20:47:53",
-	canLike: true
-};
-const exampledata3 = {
-	userId: "jkatzeff-fake-2",
-	type: "spotify",
-	songURI: "spotify:track:2UYHP0RQqPFvue0Ygs5Amm",
-	numLikes: 100,
-	date: "11/11/2018",
-	time: "21:20:10",
-	canLike: true
-};
-const exampledata4 = {
-	userId: "jkatzeff-fake-2",
-	type: "spotify",
-	songURI: "spotify:track:2UYHP0RQqPFvue0Ygs5Amm",
-	numLikes: 100,
-	date: "11/11/2018",
-	time: "21:20:10",
-	canLike: false
-};
-
 export default class LoggedInPage extends React.Component {
 	constructor(props) {
 		super(props);
@@ -119,7 +81,6 @@ export default class LoggedInPage extends React.Component {
 		return [date, time];
 	};
 	createSnip = (track) => {
-		console.log("URI: " + track.uri);
 		const [date, time] = this.getDate()
 		let newSnip = {
 			userId: this.state.userId,
@@ -154,7 +115,6 @@ export default class LoggedInPage extends React.Component {
 		// todo: make banner include spotify loggedin status
 		const topSongs = this.state.topSongs;
 		const snips = this.state.snips;
-		console.log(topSongs)
 		return (
 			<div>
 				<Banner
