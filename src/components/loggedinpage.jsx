@@ -2,7 +2,6 @@ import React from "react";
 import SnipsContainer from "./snipscontainer.jsx";
 import Banner from "./banner.jsx";
 import LoginToSpotify from "./logintospotify.jsx";
-import PostNewSnip from "./postnewsnip.jsx";
 var Spotify = require("spotify-web-api-js");
 var spotifyWebApi = new Spotify();
 
@@ -17,6 +16,43 @@ function getHashParams() {
 	return hashParams;
 }
 
+const exampledata = {
+	userId: "jkatzeff",
+	type: "spotify",
+	songURI: "spotify:track:3QkTIg9pFStcRvsC3SA10t",
+	numLikes: 0,
+	date: "11/11/2018",
+	time: "9:09:59",
+	canLike: true
+};
+const exampledata2 = {
+	userId: "jkatzeff-fake",
+	type: "spotify",
+	songURI: "spotify:track:6QXQEeKlpcEtg5eOJfr8nO",
+	numLikes: 0,
+	date: "11/11/2018",
+	time: "20:47:53",
+	canLike: true
+};
+const exampledata3 = {
+	userId: "jkatzeff-fake-2",
+	type: "spotify",
+	songURI: "spotify:track:2UYHP0RQqPFvue0Ygs5Amm",
+	numLikes: 100,
+	date: "11/11/2018",
+	time: "21:20:10",
+	canLike: true
+};
+const exampledata4 = {
+	userId: "jkatzeff-fake-2",
+	type: "spotify",
+	songURI: "spotify:track:2UYHP0RQqPFvue0Ygs5Amm",
+	numLikes: 100,
+	date: "11/11/2018",
+	time: "21:20:10",
+	canLike: false
+};
+
 export default class LoggedInPage extends React.Component {
 	constructor(props) {
 		super(props);
@@ -25,12 +61,12 @@ export default class LoggedInPage extends React.Component {
 		this.state = {
 			loggedInSpotify: token ? true : false,
 			userId: "",
-			topSongs: []
+			topSongs: [],
+			snips: [exampledata, exampledata2, exampledata3, exampledata4]
 		};
 		if (token) {
 			spotifyWebApi.setAccessToken(token);
 		}
-		// this.updateInfo = this.updateInfo.bind(this);
 	}
 
 	componentDidMount() {
@@ -49,14 +85,76 @@ export default class LoggedInPage extends React.Component {
 	}
 	getTopSongs() {
 		spotifyWebApi.getMyTopTracks({ limit: 5 }).then(response => {
-			this.setState({ topSongs: response.items.map(item => item.name) });
+			this.setState({ topSongs: response.items.map(item => item) });
+			clearInterval(this.timerID);
 		});
 	}
+	getDate = () => {
+		let curr_time = new Date();
+		let day = curr_time.getDate();
+		if (day < 10) {
+			day = "0" + day;
+		}
+		let month = curr_time.getMonth() + 1;
+		if (month < 10) {
+			month = "0" + month;
+		}
+		let year = curr_time.getFullYear();
+		const date = month + "/" + day + "/" + year;
+
+		let hours = curr_time.getHours();
+		if(hours < 10) {
+			hours = "0" + hours;
+		}
+		let minutes = curr_time.getMinutes();
+		if(minutes < 10) {
+			minutes = "0" + minutes;
+		}
+		let seconds = curr_time.getSeconds();
+		if(seconds < 10) {
+			seconds = "0" + seconds;
+		}
+		const time = hours+":"+minutes+":"+seconds;
+
+		return [date, time];
+	};
+	createSnip = (track) => {
+		console.log("URI: " + track.uri);
+		const [date, time] = this.getDate()
+		let newSnip = {
+			userId: this.state.userId,
+			type: "spotify",
+			songURI: track.uri,
+			numLikes: 0,
+			date: date,
+			time: time,
+			canLike: true
+		};
+		const oldSnips = this.state.snips;
+		let newSnips = [newSnip, ...oldSnips];
+		this.setState({snips: newSnips})
+	};
+	handleLike = snip => {
+		let arr = this.state.snips;
+		const index = arr.indexOf(snip);
+		arr[index].numLikes++;
+		arr[index].canLike = !arr[index].canLike;
+		this.setState({ snips: arr });
+	};
+	handleUnlike = snip => {
+		let arr = this.state.snips;
+		const index = arr.indexOf(snip);
+		arr[index].numLikes--;
+		arr[index].canLike = !arr[index].canLike;
+		this.setState({ snips: arr });
+	};
 	render() {
 		const loggedIn = this.state.loggedInSpotify;
 		const spotifyUser = this.state.userId;
 		// todo: make banner include spotify loggedin status
-		const songs = this.state.topSongs;
+		const topSongs = this.state.topSongs;
+		const snips = this.state.snips;
+		console.log(topSongs)
 		return (
 			<div>
 				<Banner
@@ -64,8 +162,14 @@ export default class LoggedInPage extends React.Component {
 					username={this.props.username}
 					spotifyUser={spotifyUser}
 				/>
-				<PostNewSnip songs={songs} />
-				<SnipsContainer />
+				{loggedIn ? null : <LoginToSpotify />}
+				<SnipsContainer
+					allSnips={snips}
+					topSongs={topSongs}
+					createSnip={this.createSnip}
+					handleLike={this.handleLike}
+					handleUnlike={this.handleUnlike}
+				/>
 			</div>
 		);
 	}

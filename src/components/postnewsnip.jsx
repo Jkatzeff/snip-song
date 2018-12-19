@@ -1,17 +1,17 @@
 import React from "react";
 
-const PostNewSnip = props => {
+const PostNewSnip = ({topSongs, createSnip}) => {
 	return (
 		<div className="snip-container">
 			<div className="snip">
-				{props.songs.map(snip => (
+				{topSongs.map(track => {return (
 					<button
-						onClick={() => {}}
+						onClick={() => {createSnip(track)}}
 						className="flex-one display-flex"
 					>
-						{snip}
+						{track.name}
 					</button>
-				))}
+				)})}
 			</div>
 		</div>
 	);
