@@ -1,15 +1,28 @@
 import React from "react";
 
-const PostNewSnip = ({topSongs, createSnip}) => {
+const PostNewSnip = ({topSongs, createSnip, onCreate}) => {
+	const doStuff = (track) => {
+		createSnip(track);
+		if(onCreate){
+			onCreate();
+		}
+	}
 	return (
-		<div className="snip-container">
-			<div className="snip">
+		<div>
+			<div className="default-login-page">
 				{topSongs.map(track => {return (
 					<button
-						onClick={() => {createSnip(track)}}
+						onClick={() => {doStuff(track)
+
+						}}
 						className="flex-one display-flex"
 					>
+						<div className="flex-one">
 						{track.name}
+						</div>
+						<div className="flex-one">
+						{track.artists[0].name}
+						</div>
 					</button>
 				)})}
 			</div>

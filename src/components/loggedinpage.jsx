@@ -62,7 +62,7 @@ export default class LoggedInPage extends React.Component {
 			loggedInSpotify: token ? true : false,
 			userId: "",
 			topSongs: [],
-			snips: [exampledata, exampledata2, exampledata3, exampledata4]
+			snips: []
 		};
 		if (token) {
 			spotifyWebApi.setAccessToken(token);
@@ -163,13 +163,14 @@ export default class LoggedInPage extends React.Component {
 					spotifyUser={spotifyUser}
 				/>
 				{loggedIn ? null : <LoginToSpotify />}
-				<SnipsContainer
-					allSnips={snips}
-					topSongs={topSongs}
-					createSnip={this.createSnip}
-					handleLike={this.handleLike}
-					handleUnlike={this.handleUnlike}
-				/>
+				{loggedIn ? <SnipsContainer
+									allSnips={snips}
+									topSongs={topSongs}
+									createSnip={this.createSnip}
+									handleLike={this.handleLike}
+									handleUnlike={this.handleUnlike}
+									spotifyWebApi={spotifyWebApi}
+								/> : null}
 			</div>
 		);
 	}
