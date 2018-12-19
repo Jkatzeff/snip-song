@@ -2,21 +2,21 @@ import React from "react";
 
 const LikeOrUnlike = ({canLike, onLike, onUnlike, data}) => {
 	return canLike ? (
-		<a
+		<button
 			href="#"
 			className="user-info-action-like"
 			onClick={() => onLike(data)}
 		>
 			<div className="user-info-text">Like!</div>
-		</a>
+		</button>
 	) : (
-		<a
+		<button
 			href="#"
 			className="user-info-action-dislike"
 			onClick={() => onUnlike(data)}
 		>
 			<div className="user-info-text">Unlike!</div>
-		</a>
+		</button>
 	);
 };
 

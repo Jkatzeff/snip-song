@@ -1,5 +1,4 @@
 import React from 'react';
-import Banner from '../banner.jsx'
 
 const DefaultLoginPage = ({checkLogin, register}) => {
   return (

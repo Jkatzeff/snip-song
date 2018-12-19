@@ -16,6 +16,7 @@ const PostNewSnip = ({topSongs, createSnip, onCreate}) => {
 
 						}}
 						className="flex-one display-flex"
+						key={track.artists[0].name+track.name}
 					>
 						<div className="flex-one">
 						{track.name}
