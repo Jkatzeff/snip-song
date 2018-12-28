@@ -31,6 +31,9 @@ class App extends Component {
     }
   };
 
+  logout = () => {
+    this.stateState({loggedIn: false, username: ""});
+  }
   register = () => {
     let username = document.getElementById("username").value;
     let passwd = document.getElementById("password").value;
@@ -54,6 +57,7 @@ class App extends Component {
           <LoggedInPage
             loggedIn={this.state.loggedIn}
             username={this.state.username}
+            logout={this.logout}
           />
         ) : (
           <LogInPage

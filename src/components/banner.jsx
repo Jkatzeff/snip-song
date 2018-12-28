@@ -1,11 +1,16 @@
 import React from "react";
 import logo from "../spotify-logo.svg";
-const Banner = ({loggedIn, username, spotifyUser}) => {
+const Banner = ({ loggedIn, username, spotifyUser, logout }) => {
 	return (
-		<div className="banner">
+		<div className="banner display-flex">
 			{loggedIn ? (
-				<div className="flex-two banner-text">
-					<h3>Welcome, {username}. {spotifyUser ? "Logged in as " + spotifyUser + " on Spotify." : ""}</h3>
+				<div className="flex-one banner-text">
+					<h3>
+						Welcome, {username}.{" "}
+						{spotifyUser
+							? "Logged in as " + spotifyUser + " on Spotify."
+							: ""}
+					</h3>
 				</div>
 			) : (
 				<div className="flex-two banner-text">
@@ -15,11 +20,18 @@ const Banner = ({loggedIn, username, spotifyUser}) => {
 					</h3>
 				</div>
 			)}
-			<div className="flex-one">
+			<div className="flex-one display-flex">
+				<div className="flex-one">Powered by Spotify (and you!) </div>
 				<div className="flex-one">
-					<div>Powered by Spotify (and you!) </div>
 					<img src={logo} className="spotify-logo" alt="logo" />
 				</div>
+				{loggedIn ? (
+					<div className="flex-one">
+						<a href="" onClick={() => logout()}>
+							<h3> Log out. </h3>
+						</a>
+					</div>
+				) : null}
 			</div>
 		</div>
 	);

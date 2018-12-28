@@ -121,6 +121,7 @@ export default class LoggedInPage extends React.Component {
 					loggedIn={this.props.loggedIn}
 					username={this.props.username}
 					spotifyUser={spotifyUser}
+					logout={this.props.logout}
 				/>
 				{loggedIn ? null : <LoginToSpotify />}
 				{loggedIn ? <SnipsContainer
