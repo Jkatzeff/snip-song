@@ -13,7 +13,6 @@ const PostNewSnip = ({topSongs, createSnip, onCreate}) => {
 				{topSongs.map(track => {return (
 					<button
 						onClick={() => {doStuff(track)
-
 						}}
 						className="flex-one display-flex"
 						key={track.artists[0].name+track.name}

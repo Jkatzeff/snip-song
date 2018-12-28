@@ -84,7 +84,7 @@
 
 
 .embedded-song {
-  flex: 2;
+  flex: 1;
   border: 1px solid black;  
   /*height: 100px;*/
   /*position: absolute;*/
@@ -211,4 +211,13 @@
 
 .display-flex { 
   display: flex;
+}
+
+.flex-column {
+  flex-direction: column;
+}
+
+.input-padding {
+  padding-top: 0;
+  padding-left: 0;
 }
