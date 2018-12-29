@@ -32,18 +32,26 @@ export default class LoggedInPage extends React.Component {
 	}
 
 	componentDidMount() {
-		this.timerID = setInterval(() => {
-			this.getCurrentUser();
-			this.getTopSongs();
-		}, 3000);
+		if(this.state.userId === ""){
+			this.timerID = setInterval(() => {
+				this.getCurrentUser();
+				this.getTopSongs();
+			}, 3000);
+		}
 	}
 	componentWillUnmount() {
-		clearInterval(this.timerID);
+		if(this.timerID){
+			clearInterval(this.timerID);
+		}
 	}
 	getCurrentUser() {
 		spotifyWebApi
 			.getMe([])
-			.then(response => this.setState({ userId: response.id }));
+			.then(response => {
+				this.setState({ userId: response.id });
+				this.props.setSpotifyUsername(response.id);
+				clearInterval(this.timerID);
+			});
 	}
 	getTopSongs() {
 		spotifyWebApi.getMyTopTracks({ limit: 5 }).then(response => {

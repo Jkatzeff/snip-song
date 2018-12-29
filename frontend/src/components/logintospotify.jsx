@@ -3,7 +3,7 @@ import spotifyLogo from "../spotify-logo.svg";
 
 const LoginToSpotify = () => {
 	return (
-		<div className="description login-page">
+		<div className="">
 			<div className="user-info-text">
 				<a href="http://localhost:8888/login">
 					<div className="flex-and-display">
