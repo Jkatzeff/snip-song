@@ -27,7 +27,13 @@ export default class SearchForTrack extends React.Component {
 		return (
 			<div>
 				<div>
-					<input id="query" type="text" />
+								<div className="display-flex">
+				<div className="user-info-text">
+
+					<input id="query" type="text" /></div></div>
+									<div className="display-flex">
+				<div className="user-info-text">
+
 					<button
 						href="#"
 						className="flex-one"
@@ -39,8 +45,9 @@ export default class SearchForTrack extends React.Component {
 						}}
 					>
 						<div>Search for track.</div>
-					</button>
+					</button></div></div>
 				</div>
+				<br/>
 				{(response && active) ? 
 					<div>
 					<button onClick={() => this.onCreate()}>Hide list.</button>

@@ -26,5 +26,4 @@ idea.txt
 
 backend/node_modules
 frontend/node_modules
-backend/server.js
 backend/test/connection.js
