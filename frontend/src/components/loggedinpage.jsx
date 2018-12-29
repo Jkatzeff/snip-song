@@ -131,8 +131,8 @@ export default class LoggedInPage extends React.Component {
 					spotifyUser={spotifyUser}
 					logout={this.props.logout}
 				/>
-				<div className="display-flex">
-				<div className="user-info-text">
+				<div className="-flex">
+				<div className="user-info">
 				{loggedIn ? null : <LoginToSpotify />}
 				{loggedIn ? <SnipsContainer
 									allSnips={snips}

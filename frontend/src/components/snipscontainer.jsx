@@ -24,13 +24,17 @@ export default class SnipsContainer extends React.Component {
 		} = this.props;
 		return (
 			<div>
+				<br />
+				<div className="display-flex">
+				<div className="user-info-text">
 				<button
 					onClick={() => {
 						this.show_or_hide();
 					}}
 				>
 					{show ? "Hide top songs?" : "Show top songs?"}
-				</button>
+				</button></div>
+				</div>
 				{show ? (
 					<PostNewSnip topSongs={topSongs} createSnip={createSnip} />
 				) : null}

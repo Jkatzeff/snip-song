@@ -16,7 +16,10 @@ const LoginToSpotify = () => {
 					/>
 					</div></div>
 				</a>
-				<div size={20}>Authorize Spotify</div>
+				<div className="display-flex">
+				<div className="user-info-text">
+
+				<div size={20}>Authorize Spotify</div></div>></div>
 			</div>
 		</div>
 	);
