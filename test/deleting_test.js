@@ -1,6 +1,6 @@
 const mocha = require('mocha');
 const assert = require('assert');
-const SnipModel = require('../models/snipmodel')
+const Snip = require('../models/snip')
 
 
 // as a reminder:
@@ -17,7 +17,7 @@ describe('Deleting Records', function(){
 	var snip;
 
 	beforeEach(function(done){
-		snip = new SnipModel({
+		snip = new Snip({
 		 	userId: "jkatzeff",
 		 	type: "spotify",
 		 	songURI: "spotify:track:3QkTIg9pFStcRvsC3SA10t",
@@ -32,8 +32,8 @@ describe('Deleting Records', function(){
 	})
 
 	it('Delete a record', function(done){
-		SnipModel.findOneAndRemove({userId: "jkatzeff"}).then(function(){
-			SnipModel.findOne({userId: "jkatzeff"}).then(function(result){
+		Snip.findOneAndRemove({userId: "jkatzeff"}).then(function(){
+			Snip.findOne({userId: "jkatzeff"}).then(function(result){
 				assert(result === null);
 				done();
 			})

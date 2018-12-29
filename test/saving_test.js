@@ -1,6 +1,6 @@
 const mocha = require('mocha');
 const assert = require('assert');
-const SnipModel = require('../models/snipmodel')
+const Snip = require('../models/snip')
 
 
 // as a reminder:
@@ -15,7 +15,7 @@ const SnipModel = require('../models/snipmodel')
 // });
 describe('Saving Records', function(){
 	it('Saves record (only userId) to DB', function(done){
-		var snip = new SnipModel({
+		var snip = new Snip({
 			userId: "jacobkatzeff"
 		});
 		snip.save().then(function(resolve){
@@ -25,7 +25,7 @@ describe('Saving Records', function(){
 	})
 
 	it('Saved record (full Snip data) to DB', function(done){
-		 var snip = new SnipModel({
+		 var snip = new Snip({
 		 	userId: "jkatzeff",
 		 	type: "spotify",
 		 	songURI: "spotify:track:3QkTIg9pFStcRvsC3SA10t",

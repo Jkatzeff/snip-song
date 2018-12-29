@@ -24,6 +24,6 @@ const SnipSchema = new Schema({
 	canLike: Boolean
 });
 
-const SnipModel = mongoose.model('snipmodel', SnipSchema)
+const Snip = mongoose.model('snip', SnipSchema)
 
-module.exports = SnipModel;
+module.exports = Snip;

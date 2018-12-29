@@ -1,6 +1,6 @@
 const mocha = require('mocha');
 const assert = require('assert');
-const SnipModel = require('../models/snipmodel')
+const Snip = require('../models/snip')
 
 
 // as a reminder:
@@ -17,7 +17,7 @@ describe('Updating Records', function(){
 	var snip;
 
 	beforeEach(function(done){
-		snip = new SnipModel({
+		snip = new Snip({
 		 	userId: "jkatzeff",
 		 	type: "spotify",
 		 	songURI: "spotify:track:3QkTIg9pFStcRvsC3SA10t",
@@ -32,8 +32,8 @@ describe('Updating Records', function(){
 	})
 
 	it('Update a record in DB', function(done){
-		SnipModel.findOneAndUpdate({userId: "jkatzeff"}, {userId: "jacobkatzeff"}).then(function(){
-			SnipModel.findOne({_id: snip._id}).then(function(result){
+		Snip.findOneAndUpdate({userId: "jkatzeff"}, {userId: "jacobkatzeff"}).then(function(){
+			Snip.findOne({_id: snip._id}).then(function(result){
 				assert(result.userId === "jacobkatzeff");
 				done();
 			})
@@ -41,8 +41,8 @@ describe('Updating Records', function(){
 	})
 // deprecated
 	it('Update a record in DB directly', function(done){
-		snip.update({userId: "jacobkatzeff"}).then(function(){
-			SnipModel.findOne({_id: snip._id}).then(function(result){
+		snip.updateOne({userId: "jacobkatzeff"}).then(function(){
+			Snip.findOne({_id: snip._id}).then(function(result){
 				assert(result.userId === "jacobkatzeff");
 				done();
 			})
@@ -52,8 +52,8 @@ describe('Updating Records', function(){
 
 	// updating numLikes
 	it('Increments number of likes', function(done){
-		SnipModel.update({}, { $inc: {numLikes: 1}}).then(function(){
-			SnipModel.findOne({userId: "jkatzeff"}).then(function(result){
+		Snip.updateMany({}, { $inc: {numLikes: 1}}).then(function(){
+			Snip.findOne({userId: "jkatzeff"}).then(function(result){
 				assert(result.numLikes === 1);
 				done();
 			})

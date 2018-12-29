@@ -123,6 +123,8 @@ export default class LoggedInPage extends React.Component {
 					spotifyUser={spotifyUser}
 					logout={this.props.logout}
 				/>
+				<div className="display-flex">
+				<div className="user-info-text">
 				{loggedIn ? null : <LoginToSpotify />}
 				{loggedIn ? <SnipsContainer
 									allSnips={snips}
@@ -131,7 +133,7 @@ export default class LoggedInPage extends React.Component {
 									handleLike={this.handleLike}
 									handleUnlike={this.handleUnlike}
 									spotifyWebApi={spotifyWebApi}
-								/> : null}
+								/> : null}</div></div>
 			</div>
 		);
 	}

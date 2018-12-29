@@ -16,7 +16,7 @@ before(function(done){
 
 //Drop items before each test
 beforeEach(function(done){
-	mongoose.connection.collections.snipmodels.drop(function(){
+	mongoose.connection.collections.snips.drop(function(){
 		done()
 	})
 })

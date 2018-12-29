@@ -1,6 +1,6 @@
 const mocha = require('mocha');
 const assert = require('assert');
-const SnipModel = require('../models/snipmodel')
+const Snip = require('../models/snip')
 
 
 // as a reminder:
@@ -17,7 +17,7 @@ describe('Finding Records', function(){
 	var snip;
 
 	beforeEach(function(done){
-		snip = new SnipModel({
+		snip = new Snip({
 		 	userId: "jkatzeff",
 		 	type: "spotify",
 		 	songURI: "spotify:track:3QkTIg9pFStcRvsC3SA10t",
@@ -32,14 +32,14 @@ describe('Finding Records', function(){
 	})
 
 	it('Find one record from DB', function(done){
-		SnipModel.findOne({userId: "jkatzeff"}).then(function(result){
+		Snip.findOne({userId: "jkatzeff"}).then(function(result){
 			assert(result.userId === "jkatzeff")
 			done();
 		})
 	})
 
 	it('Find record by id', function(done){
-		SnipModel.findOne({_id: snip._id}).then(function(result){
+		Snip.findOne({_id: snip._id}).then(function(result){
 			assert(result._id.toString() === snip._id.toString());
 			done();
 		})
