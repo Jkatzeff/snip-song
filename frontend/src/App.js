@@ -2,7 +2,8 @@ import React, { Component } from "react";
 import "./App.css";
 import LogInPage from "./components/loginpage.jsx";
 import LoggedInPage from "./components/loggedinpage.jsx";
-var validLogins=[{username: "admin", passwd: "a"}]
+import axios from 'axios';
+
 class App extends Component {
   constructor() {
     super();
@@ -10,46 +11,47 @@ class App extends Component {
       loggedIn: false,
       username: ""
     };
+    this.registerUserInDb = this.registerUserInDb.bind(this);
   }
   userExistsInDb = (username) => {
-    fetch("/api/userExists")
-      .then(data => data.json())
-      .then((res) => {
-        if(res.success === true){
-          return true;
+    return new Promise((resolve, reject) => {
+      axios.get("/api/userExists", {username: username}).then((response) => {
+        console.log(response);
+        if(response && response.data && response.data.success === true){
+          resolve(response.data.userExists);
         }else{
-          return false;
+          resolve(true);
         }
-      })
+      }).catch((e) => {reject(e)})})
   }
-  verifyUserInfoInDb = (username, passwd) => {
-    fetch("/api/verifyUser")
-      .then(data => data.json())
-      .then((res) => {
-        console.log(res);
-        if(res.success === true && res.loggedIn === true){
-          this.setState({loggedIn: true, username: username});
-        }else{
-          alert("Unsuccessful login. Try again.");
-          document.getElementById("username").value = "";
-          document.getElementById("password").value = "";
+  verifyLoginToDb = (username, passwd) => {
+    return new Promise((resolve, reject) => {
+      axios.post("/api/verifyLogin", {username: username, passwd: passwd}).then((response) => {
+        if(response.data.loggedIn === true){
+          this.setState({loggedIn: true, username: username})
         }
-
-      })
-  }
+        else{
+          this.setState({loggedIn: false, username: ""})
+        }
+      })      
+    })}
   registerUserInDb = (username, passwd) => {
-    fetch("/api/verifyUser")
-      .then(data => data.json())
-      .then((res) => {
-        if(res.success === true){
-          alert("Registed as " + username);
+    return new Promise((resolve, reject) => {
+      axios.post("/api/registerUser", {username: username, passwd: passwd}).then((response) => {
+        if(response.data.success === true){
+          resolve(true);
         }
-      })
+      })      
+    })
+
   }
   checkLogin = () => {
     let username = document.getElementById("username").value;
     let passwd = document.getElementById("password").value;
-    const a = this.verifyUserInfoInDb(username,passwd);
+    this.verifyLoginToDb(username,passwd).then((res)=>{
+      if(res){return true;}
+      else{return false;}
+    });
   };
 
   logout = () => {
@@ -58,24 +60,23 @@ class App extends Component {
   register = () => {
     let username = document.getElementById("username").value;
     let passwd = document.getElementById("password").value;
-    if(this.userExistsInDb() === true){
-      alert("Username already taken, please choose another.");
-      return;
-    }
-    console.log("user doesn't exist, registering...")
-    this.registerUserInDb(username, passwd);
-    // let found = false;
-    // validLogins.forEach(({ username: curr_user, passwd: curr_pass }) => {
-    //   if (curr_user === username) {
-    //     alert("Username already taken, please choose another.");
-    //     found = true;
-    //   }
-    // });
-    // if (!found) {
-    //   validLogins.push({ username: username, passwd: passwd });
-    // }
-    document.getElementById("username").value = "";
-    document.getElementById("password").value = "";
+    let registerUserInDb = this.registerUserInDb;
+    this.userExistsInDb(username).then(function(res){
+      if (res === true){
+        alert("Username " + username + " already taken, please choose another.");
+        document.getElementById("username").value = "";
+        document.getElementById("password").value = "";
+        return;        
+      }else{
+        console.log("user doesn't exist, registering...")
+        registerUserInDb(username, passwd).then(()=>{
+          alert("Registered user " + username);
+          document.getElementById("username").value = "";
+          document.getElementById("password").value = "";
+          return;
+        })
+      }
+    })
   };
   render() {
     return (

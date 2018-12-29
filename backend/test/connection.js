@@ -1,7 +1,8 @@
 const mongoose = require('mongoose');
 
 
-mongoose.connect('mongodb://localhost/test');
+mongoose.connect('mongodb://jkatzeff:cntyd3172yy@ds029456.mlab.com:29456/snip-backend',
+	{ useNewUrlParser: true });
 
 //Connect to db before tests
 
