@@ -15,7 +15,7 @@ class App extends Component {
   }
   userExistsInDb = (username) => {
     return new Promise((resolve, reject) => {
-      axios.get("/api/userExists", {username: username}).then((response) => {
+      axios.post("/api/userExists", {username: username}).then((response) => {
         console.log(response);
         if(response && response.data && response.data.success === true){
           resolve(response.data.userExists);
