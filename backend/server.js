@@ -5,6 +5,7 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const logger = require("morgan");
 const User = require("./models/user");
+const Snip = require("./models/snip");
 const bcrypt = require("bcrypt");
 
 const saltRounds = 10;
@@ -14,8 +15,7 @@ const app = express();
 const router = express.Router();
 
 // this is our MongoDB database
-//not showing my real db route
-const dbRoute = "DBROUTE";
+const dbRoute = "mongodb://jkatzeff:cntyd3172yy@ds029456.mlab.com:29456/snip-backend";
 
 // connects our back end code with the database
 mongoose.connect(
@@ -107,6 +107,33 @@ router.post("/addSpotifyToUser", (req, res) => {
   })
 })
 
+
+
+//Snip related methods
+
+
+router.post("/getNSnips", (req, res) => {
+  const {username, numSnips} = req.body;
+  Snip.find({}).limit(+numSnips).sort({date: -1}).exec((err, snips) => {
+    if(err) return res.json({success: false, snips: []});
+    return res.json({success: true, snips: snips});
+  })
+})
+
+router.post("/addSnip", (req, res) => {
+  try {
+    const newSnip = new Snip(req.body);
+    newSnip.save();
+    return res.json({success: true});
+  }catch(err){
+    return res.json({success: false, error: err});
+  }
+})
+
+// router.post("/removeSnip", (req, res) => {
+
+// })
+
 // this is our update method
 // this method overwrites existing data in our database
 // router.post("/updateUser", (req, res) => {
@@ -165,8 +192,8 @@ var cors = require('cors');
 var querystring = require('querystring');
 var cookieParser = require('cookie-parser');
 
-var client_id = 'client id'; // Your client id
-var client_secret = 'client secret'; // Your secret
+var client_id = '6857dfb8eb984f7fa4cf7e3eddf7a5ee'; // Your client id
+var client_secret = 'c58e819750074c2d858a1b223b45e416'; // Your secret
 var redirect_uri = 'http://localhost:8888/callback'; // Your redirect uri
 
 /**

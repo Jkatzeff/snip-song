@@ -2,6 +2,7 @@ import React from "react";
 import SnipsContainer from "./snipscontainer.jsx";
 import Banner from "./banner.jsx";
 import LoginToSpotify from "./logintospotify.jsx";
+import axios from "axios";
 var Spotify = require("spotify-web-api-js");
 var spotifyWebApi = new Spotify();
 
@@ -22,7 +23,7 @@ export default class LoggedInPage extends React.Component {
 		const token = params.access_token;
 		this.state = {
 			loggedInSpotify: token ? true : false,
-			userId: "",
+			spotifyUsername: "",
 			topSongs: [],
 			snips: []
 		};
@@ -32,7 +33,7 @@ export default class LoggedInPage extends React.Component {
 	}
 
 	componentDidMount() {
-		if(this.state.userId === ""){
+		if(this.state.spotifyUsername === ""){
 			this.timerID = setInterval(() => {
 				this.getCurrentUser();
 				this.getTopSongs();
@@ -48,7 +49,7 @@ export default class LoggedInPage extends React.Component {
 		spotifyWebApi
 			.getMe([])
 			.then(response => {
-				this.setState({ userId: response.id });
+				this.setState({ spotifyUsername: response.id });
 				this.props.setSpotifyUsername(response.id);
 				clearInterval(this.timerID);
 			});
@@ -91,7 +92,7 @@ export default class LoggedInPage extends React.Component {
 	createSnip = (track) => {
 		const [date, time] = this.getDate()
 		let newSnip = {
-			userId: this.state.userId,
+			userId: this.state.spotifyUsername,
 			type: "spotify",
 			songURI: track.uri,
 			numLikes: 0,
@@ -101,7 +102,17 @@ export default class LoggedInPage extends React.Component {
 		};
 		const oldSnips = this.state.snips;
 		let newSnips = [newSnip, ...oldSnips];
-		this.setState({snips: newSnips})
+		this.setState({snips: newSnips});
+		axios.post("/api/addSnip", newSnip)
+			 .then(response => {
+			 	console.log(response);
+			 	if(response.data.success === true){
+					console.log('success')
+			 	}else{
+			 		console.log("error in adding snip:")
+			 		console.log(response.data.err);
+			 	}
+			 })
 	};
 	handleLike = snip => {
 		let arr = this.state.snips;
@@ -119,7 +130,7 @@ export default class LoggedInPage extends React.Component {
 	};
 	render() {
 		const loggedIn = this.state.loggedInSpotify;
-		const spotifyUser = this.state.userId;
+		const spotifyUser = this.state.spotifyUsername;
 		// todo: make banner include spotify loggedin status
 		const topSongs = this.state.topSongs;
 		const snips = this.state.snips;

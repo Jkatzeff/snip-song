@@ -22,6 +22,7 @@ const SnipSchema = new Schema({
 	date: String,
 	time: String,
 	canLike: Boolean
+	//likedBy: [String]
 });
 
 const Snip = mongoose.model('snip', SnipSchema)

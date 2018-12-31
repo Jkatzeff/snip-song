@@ -9,11 +9,9 @@ export default class SearchForTrack extends React.Component {
 		};
 	}
 	searchForTrack(query) {
-		console.log(query)
 		this.props.spotifyWebApi
 			.searchTracks([query])
 			.then(response => {
-				console.log(response.tracks.items);
 				this.setState({ active: true, query_response: response.tracks.items });
 			});
 	}
