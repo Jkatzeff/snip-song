@@ -53,7 +53,32 @@ export default class LoggedInPage extends React.Component {
 			clearInterval(this.timerID);
 		}
 	}
-
+	addSnipToDb = (snip) => {
+		return new Promise((resolve, reject) => {
+			axios.post("/api/addSnip", snip)
+				 .then(response => {
+				 	console.log(response);
+				 	if(response.data.success === true){
+						console.log('successfully added snip to db')
+						resolve(0)
+				 	}else{
+				 		console.log("error in adding snip:")
+				 		console.log(response.data.err);
+				 		reject(-1)
+				 	}
+				 })			
+		})
+		// axios.post("/api/addSnip", newSnip)
+		// 	 .then(response => {
+		// 	 	console.log(response);
+		// 	 	if(response.data.success === true){
+		// 			console.log('success')
+		// 	 	}else{
+		// 	 		console.log("error in adding snip:")
+		// 	 		console.log(response.data.err);
+		// 	 	}
+		// 	 })
+	}
 	getNewSnips() {
 		axios.post("/api/getNSnips", {username: this.props.username, numSnips: 25})
 			.then(response => {
@@ -112,7 +137,7 @@ export default class LoggedInPage extends React.Component {
 	createSnip = (track) => {
 		const [date, time] = this.getDate()
 		let newSnip = {
-			userId: this.state.spotifyUsername,
+			userId: this.props.username,
 			type: "spotify",
 			songURI: track.uri,
 			numLikes: 0,
@@ -123,18 +148,19 @@ export default class LoggedInPage extends React.Component {
 		const oldSnips = this.state.snips;
 		let newSnips = [newSnip, ...oldSnips];
 		this.setState({snips: newSnips});
-		axios.post("/api/addSnip", newSnip)
-			 .then(response => {
-			 	console.log(response);
-			 	if(response.data.success === true){
-					console.log('success')
-			 	}else{
-			 		console.log("error in adding snip:")
-			 		console.log(response.data.err);
-			 	}
-			 }).then(() => {
-			 	this.getNewSnips();
-			 })
+		this.addSnipToDb(newSnip).then(() => this.getNewSnips())
+		// axios.post("/api/addSnip", newSnip)
+		// 	 .then(response => {
+		// 	 	console.log(response);
+		// 	 	if(response.data.success === true){
+		// 			console.log('success')
+		// 	 	}else{
+		// 	 		console.log("error in adding snip:")
+		// 	 		console.log(response.data.err);
+		// 	 	}
+		// 	 }).then(() => {
+		// 	 	this.getNewSnips();
+		// 	 })
 	};
 	handleLike = snip => {
 		let arr = this.state.snips;
@@ -168,7 +194,7 @@ export default class LoggedInPage extends React.Component {
 				<div className="user-info">
 				{loggedIn ? null : <LoginToSpotify />}
 				{loggedIn ? <SnipsContainer
-									allSnips={snips}
+									allSnips={snips.reverse()}
 									topSongs={topSongs}
 									createSnip={this.createSnip}
 									handleLike={this.handleLike}
