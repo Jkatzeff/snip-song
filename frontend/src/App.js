@@ -37,10 +37,12 @@ class App extends Component {
         .post("/api/verifyLogin", { username: username, passwd: passwd })
         .then(response => {
           if (response.data.loggedIn === true) {
-            this.setState({ loggedIn: true, username: username });
-            if(response.data.spotifyUsername !== null){
-              this.setState({spotifyUsername: response.data.spotifyUsername})
-            }
+            this.setState({ loggedIn: true, username: username,
+              spotifyUsername: response.data.spotifyUsername!==null ? response.data.spotifyUsername : ""
+             });
+            // if(response.data.spotifyUsername !== null){
+            //   this.setState({spotifyUsername: response.data.spotifyUsername})
+            // }
           } else {
             this.setState({ loggedIn: false, username: "", spotifyUsername: "" });
             alert("Incorrect login information.");
@@ -128,6 +130,7 @@ class App extends Component {
             loggedIn={this.state.loggedIn}
             username={this.state.username}
             logout={this.logout}
+            spotifyUsername={this.state.spotifyUsername}
             setSpotifyUsername={this.setSpotifyUsername}
           />
         ) : (
