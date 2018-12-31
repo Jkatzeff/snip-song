@@ -43,14 +43,17 @@ export default class SnipsContainer extends React.Component {
 					createSnip={createSnip}
 				/>
 				<div className="snip-container">
-					{allSnips.map((data, index) => (
+					{allSnips.length > 0 ? allSnips.map((data, index) => (
 						<Snip
 							key={data + index}
 							data={data}
 							onLike={handleLike}
 							onUnlike={handleUnlike}
 						/>
-					))}
+
+					))
+					: <div className="center1"><div className="center2"><h4>Loading Snips...</h4></div></div>
+				}
 				</div>
 			</div>
 		);

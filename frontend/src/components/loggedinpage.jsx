@@ -30,8 +30,13 @@ export default class LoggedInPage extends React.Component {
 		if (token) {
 			spotifyWebApi.setAccessToken(token);
 		}
+		//purely for aesthetic reasons for loading snips...can remove V
+		this.sleep(500).then(() => this.getNewSnips())
+		// this.getNewSnips();
 	}
-
+	 sleep = (ms) => {
+	  return new Promise(resolve => setTimeout(resolve, ms));
+	}
 	componentDidMount() {
 		if(this.state.spotifyUsername === ""){
 			this.timerID = setInterval(() => {
@@ -39,12 +44,27 @@ export default class LoggedInPage extends React.Component {
 				this.getTopSongs();
 			}, 3000);
 		}
+		this.getSnipsInterval = setInterval(() => {
+			this.getNewSnips();
+		}, 10000);
 	}
 	componentWillUnmount() {
 		if(this.timerID){
 			clearInterval(this.timerID);
 		}
 	}
+
+	getNewSnips() {
+		axios.post("/api/getNSnips", {username: this.props.username, numSnips: 25})
+			.then(response => {
+				if(response.data.success){
+					this.setState({snips: response.data.snips})
+				}else{
+					console.log(response.data.err);
+				}
+			})
+	}
+
 	getCurrentUser() {
 		spotifyWebApi
 			.getMe([])
@@ -112,6 +132,8 @@ export default class LoggedInPage extends React.Component {
 			 		console.log("error in adding snip:")
 			 		console.log(response.data.err);
 			 	}
+			 }).then(() => {
+			 	this.getNewSnips();
 			 })
 	};
 	handleLike = snip => {
