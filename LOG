@@ -1,0 +1,2 @@
+12/31/2018:
+	Need to keep order of Snips stable, and not reactive to if a snip is liked or not. Make it less hacky, too (now it just pulls and reverses)

@@ -52,7 +52,7 @@ export default class SnipsContainer extends React.Component {
 						/>
 
 					))
-					: <div className="center1"><div className="center2"><h4>Loading Snips...</h4></div></div>
+					: <div className="center1"><div className="center2"><h4>Loading; Snips...</h4></div></div>
 				}
 				</div>
 			</div>

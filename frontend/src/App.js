@@ -37,14 +37,23 @@ class App extends Component {
         .post("/api/verifyLogin", { username: username, passwd: passwd })
         .then(response => {
           if (response.data.loggedIn === true) {
-            this.setState({ loggedIn: true, username: username,
-              spotifyUsername: response.data.spotifyUsername!==null ? response.data.spotifyUsername : ""
-             });
+            this.setState({
+              loggedIn: true,
+              username: username,
+              spotifyUsername:
+                response.data.spotifyUsername !== null
+                  ? response.data.spotifyUsername
+                  : ""
+            });
             // if(response.data.spotifyUsername !== null){
             //   this.setState({spotifyUsername: response.data.spotifyUsername})
             // }
           } else {
-            this.setState({ loggedIn: false, username: "", spotifyUsername: "" });
+            this.setState({
+              loggedIn: false,
+              username: "",
+              spotifyUsername: ""
+            });
             alert("Incorrect login information.");
             document.getElementById("username").value = "";
             document.getElementById("password").value = "";
@@ -79,18 +88,22 @@ class App extends Component {
     this.setState({ loggedIn: false, username: "" });
   };
 
-  setSpotifyUsername = (spotifyUsername) => {
-    if(this.state.username === ""){
+  setSpotifyUsername = spotifyUsername => {
+    if (this.state.username === "") {
       return;
-    }else{
-      axios.post("/api/addSpotifyToUser", {username: this.state.username, spotifyUsername: spotifyUsername})
-      .then(response => {
-        if(response.data.success === true){
-          console.log(spotifyUsername)
-        }
-      })
+    } else {
+      axios
+        .post("/api/addSpotifyToUser", {
+          username: this.state.username,
+          spotifyUsername: spotifyUsername
+        })
+        .then(response => {
+          if (response.data.success === true) {
+            console.log(spotifyUsername);
+          }
+        });
     }
-  }
+  };
   register = () => {
     let username = document.getElementById("username").value;
     let passwd = document.getElementById("password").value;

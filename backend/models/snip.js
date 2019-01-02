@@ -1,18 +1,18 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 //create schema and model
 
 //reminder: a snip is of form
-		// let newSnip = {
-		// 	userId: this.state.userId,
-		// 	type: "spotify",
-		// 	songURI: track.uri,
-		// 	numLikes: 0,
-		// 	date: date,
-		// 	time: time,
-		// 	canLike: true
-		// };
+// let newSnip = {
+// 	userId: this.state.userId,
+// 	type: "spotify",
+// 	songURI: track.uri,
+// 	numLikes: 0,
+// 	date: date,
+// 	time: time,
+// 	canLike: true
+// };
 
 const SnipSchema = new Schema({
 	userId: String,
@@ -25,6 +25,6 @@ const SnipSchema = new Schema({
 	//likedBy: [String]
 });
 
-const Snip = mongoose.model('snip', SnipSchema)
+const Snip = mongoose.model("snip", SnipSchema);
 
 module.exports = Snip;

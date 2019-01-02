@@ -1,6 +1,6 @@
 import React from "react";
 
-const LikeOrUnlike = ({onLike, onUnlike}) => {
+const LikeOrUnlike = ({ onLike, onUnlike }) => {
 	return props.canLike ? (
 		<a
 			href="#"

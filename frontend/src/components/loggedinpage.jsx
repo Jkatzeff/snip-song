@@ -31,14 +31,14 @@ export default class LoggedInPage extends React.Component {
 			spotifyWebApi.setAccessToken(token);
 		}
 		//purely for aesthetic reasons for loading snips...can remove V
-		this.sleep(500).then(() => this.getNewSnips())
+		this.sleep(500).then(() => this.getNewSnips());
 		// this.getNewSnips();
 	}
-	 sleep = (ms) => {
-	  return new Promise(resolve => setTimeout(resolve, ms));
-	}
+	sleep = ms => {
+		return new Promise(resolve => setTimeout(resolve, ms));
+	};
 	componentDidMount() {
-		if(this.state.spotifyUsername === ""){
+		if (this.state.spotifyUsername === "") {
 			this.timerID = setInterval(() => {
 				this.getCurrentUser();
 				this.getTopSongs();
@@ -49,25 +49,24 @@ export default class LoggedInPage extends React.Component {
 		}, 10000);
 	}
 	componentWillUnmount() {
-		if(this.timerID){
+		if (this.timerID) {
 			clearInterval(this.timerID);
 		}
 	}
-	addSnipToDb = (snip) => {
+	addSnipToDb = snip => {
 		return new Promise((resolve, reject) => {
-			axios.post("/api/addSnip", snip)
-				 .then(response => {
-				 	console.log(response);
-				 	if(response.data.success === true){
-						console.log('successfully added snip to db')
-						resolve(0)
-				 	}else{
-				 		console.log("error in adding snip:")
-				 		console.log(response.data.err);
-				 		reject(-1)
-				 	}
-				 })			
-		})
+			axios.post("/api/addSnip", snip).then(response => {
+				console.log(response);
+				if (response.data.success === true) {
+					console.log("successfully added snip to db");
+					resolve(0);
+				} else {
+					console.log("error in adding snip:");
+					console.log(response.data.err);
+					reject(-1);
+				}
+			});
+		});
 		// axios.post("/api/addSnip", newSnip)
 		// 	 .then(response => {
 		// 	 	console.log(response);
@@ -78,26 +77,28 @@ export default class LoggedInPage extends React.Component {
 		// 	 		console.log(response.data.err);
 		// 	 	}
 		// 	 })
-	}
+	};
 	getNewSnips() {
-		axios.post("/api/getNSnips", {username: this.props.username, numSnips: 25})
+		axios
+			.post("/api/getNSnips", {
+				username: this.props.username,
+				numSnips: 25
+			})
 			.then(response => {
-				if(response.data.success){
-					this.setState({snips: response.data.snips})
-				}else{
+				if (response.data.success) {
+					this.setState({ snips: response.data.snips });
+				} else {
 					console.log(response.data.err);
 				}
-			})
+			});
 	}
 
 	getCurrentUser() {
-		spotifyWebApi
-			.getMe([])
-			.then(response => {
-				this.setState({ spotifyUsername: response.id });
-				this.props.setSpotifyUsername(response.id);
-				clearInterval(this.timerID);
-			});
+		spotifyWebApi.getMe([]).then(response => {
+			this.setState({ spotifyUsername: response.id });
+			this.props.setSpotifyUsername(response.id);
+			clearInterval(this.timerID);
+		});
 	}
 	getTopSongs() {
 		spotifyWebApi.getMyTopTracks({ limit: 5 }).then(response => {
@@ -119,23 +120,23 @@ export default class LoggedInPage extends React.Component {
 		const date = month + "/" + day + "/" + year;
 
 		let hours = curr_time.getHours();
-		if(hours < 10) {
+		if (hours < 10) {
 			hours = "0" + hours;
 		}
 		let minutes = curr_time.getMinutes();
-		if(minutes < 10) {
+		if (minutes < 10) {
 			minutes = "0" + minutes;
 		}
 		let seconds = curr_time.getSeconds();
-		if(seconds < 10) {
+		if (seconds < 10) {
 			seconds = "0" + seconds;
 		}
-		const time = hours+":"+minutes+":"+seconds;
+		const time = hours + ":" + minutes + ":" + seconds;
 
 		return [date, time];
 	};
-	createSnip = (track) => {
-		const [date, time] = this.getDate()
+	createSnip = track => {
+		const [date, time] = this.getDate();
 		let newSnip = {
 			userId: this.props.username,
 			type: "spotify",
@@ -147,8 +148,8 @@ export default class LoggedInPage extends React.Component {
 		};
 		const oldSnips = this.state.snips;
 		let newSnips = [newSnip, ...oldSnips];
-		this.setState({snips: newSnips});
-		this.addSnipToDb(newSnip).then(() => this.getNewSnips())
+		this.setState({ snips: newSnips });
+		this.addSnipToDb(newSnip).then(() => this.getNewSnips());
 		// axios.post("/api/addSnip", newSnip)
 		// 	 .then(response => {
 		// 	 	console.log(response);
@@ -191,16 +192,20 @@ export default class LoggedInPage extends React.Component {
 					logout={this.props.logout}
 				/>
 				<div className="-flex">
-				<div className="user-info">
-				{loggedIn ? null : <LoginToSpotify />}
-				{loggedIn ? <SnipsContainer
-									allSnips={snips.reverse()}
-									topSongs={topSongs}
-									createSnip={this.createSnip}
-									handleLike={this.handleLike}
-									handleUnlike={this.handleUnlike}
-									spotifyWebApi={spotifyWebApi}
-								/> : null}</div></div>
+					<div className="user-info">
+						{loggedIn ? null : <LoginToSpotify />}
+						{loggedIn ? (
+							<SnipsContainer
+								allSnips={snips.reverse()}
+								topSongs={topSongs}
+								createSnip={this.createSnip}
+								handleLike={this.handleLike}
+								handleUnlike={this.handleUnlike}
+								spotifyWebApi={spotifyWebApi}
+							/>
+						) : null}
+					</div>
+				</div>
 			</div>
 		);
 	}
