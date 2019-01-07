@@ -1,2 +1,4 @@
 12/31/2018:
 	Need to keep order of Snips stable, and not reactive to if a snip is liked or not. Make it less hacky, too (now it just pulls and reverses)
+1/07/2018:
+	Been a bit busy lately -- haven't had much time to work on this project. While I think about how to make it less "hacky", going to just work on UI improvements. Working on tutorials to get better at design principles.

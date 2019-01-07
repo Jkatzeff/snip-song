@@ -1,6 +1,7 @@
 
 
 .App {
+  background-color: gray;
   display: grid;
   text-align: center;
 }
@@ -58,7 +59,7 @@
 
 .banner {
   /*display: flex;*/
-  background-color: pink;
+  background-color: white;
   /*width: 80vw;*/
   /*margin-left: 20px;*/
   /*max-width: 1400px;*/
@@ -177,8 +178,6 @@
 .default-login-page {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  /*align-items: stretch;*/
 }
 
 .enter-username {
@@ -200,6 +199,7 @@
 .banner-text {
   color: blue;
   font-family: "Lucida Sans Unicode";
+  justify-content: space-between;
 }
 
 

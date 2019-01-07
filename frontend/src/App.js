@@ -12,8 +12,9 @@ class App extends Component {
       username: "",
       spotifyUsername: ""
     };
-    this.registerUserInDb = this.registerUserInDb.bind(this);
   }
+  /* Sends signal to backend to check if user exists in database 
+  */
   userExistsInDb = username => {
     return new Promise((resolve, reject) => {
       axios
@@ -31,6 +32,12 @@ class App extends Component {
         });
     });
   };
+  /* Sends signal to backend to check to see if provided credentials
+     match a user in the database. If it does, sets state of App to be
+     logged in, and sets the username. If this user has already set a
+     Spotify account, also sets the state to reflect that we already
+     know the spotify account.
+  */
   verifyLoginToDb = (username, passwd) => {
     return new Promise((resolve, reject) => {
       axios
@@ -45,9 +52,6 @@ class App extends Component {
                   ? response.data.spotifyUsername
                   : ""
             });
-            // if(response.data.spotifyUsername !== null){
-            //   this.setState({spotifyUsername: response.data.spotifyUsername})
-            // }
           } else {
             this.setState({
               loggedIn: false,
@@ -61,6 +65,8 @@ class App extends Component {
         });
     });
   };
+  /* Sends signal to backend to register user. Doesn't allow registration
+     of usernames already in the database. */
   registerUserInDb = (username, passwd) => {
     return new Promise((resolve, reject) => {
       axios
@@ -72,6 +78,9 @@ class App extends Component {
         });
     });
   };
+  /* Grabs username and passwd from document, then checks to see if it's valid.
+     Possibly not needed?
+  */
   checkLogin = () => {
     let username = document.getElementById("username").value;
     let passwd = document.getElementById("password").value;
@@ -83,11 +92,14 @@ class App extends Component {
       }
     });
   };
-
+  /* Logout callback function. 
+  */
   logout = () => {
     this.setState({ loggedIn: false, username: "" });
   };
-
+  /* Callback function to set the user's Spotify account in the database
+     once the user logs in to Spotify later.
+  */
   setSpotifyUsername = spotifyUsername => {
     if (this.state.username === "") {
       return;
@@ -104,6 +116,9 @@ class App extends Component {
         });
     }
   };
+  /* Logic for registering a new account in the database. Only allows certain
+     password lengths (6<=pwd<30). 
+  */
   register = () => {
     let username = document.getElementById("username").value;
     let passwd = document.getElementById("password").value;
